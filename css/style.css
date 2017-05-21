@@ -1,0 +1,29 @@
+body {
+  text-align: center;
+}
+.content {
+  margin-top: 90px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.login-register {
+  margin-top: 20px;
+  padding: 10px;
+}
+.custom-file-control {
+  margin-left: 15px;
+}
+.custom-file-control:lang(en)::after {
+  content: "Choose avatar...";
+}
+
+.custom-file-control:lang(en)::before {
+  content: "Browse";
+}
+
+.single-card {
+  padding: 5px;
+  text-align: left;
+  margin-top: 10px;
+}
