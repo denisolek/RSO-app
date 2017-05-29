@@ -11,6 +11,12 @@
 			}
 		}
 
+		public function add_admin() {
+			$query = "INSERT INTO user (username, password, isAdmin)
+								VALUES ('admin', 'admin', true)";
+			$result = $this->c->query($query);
+		}
+
     public function add_user($username, $password) {
 			$query = "INSERT INTO user (username, password)
 								VALUES (\"" . $username . "\", \"" . $password . "\")";
