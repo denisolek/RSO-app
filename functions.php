@@ -6,7 +6,7 @@ function session_check()
         if(!isset($_COOKIE['MYSID'])) {
                 $token=md5(rand(0,1000000000));
                 setcookie('MYSID', $token);
-                $user=array('id'=>NULL,'username'=>"Visitor");
+                $user=array('id'=>NULL,'username'=>"anonymous");
                 redis_set_json($token, $user,0);
         }
         else
@@ -24,7 +24,7 @@ function authorize($username,$password, $token)
                 if ($username=="kalkos" and $password=="qwerty")
                         $user=array('id'=>333,'username'=>$username);
                 else
-                        $user=array('id'=>NULL,'username'=>"Visitor");
+                        $user=array('id'=>NULL,'username'=>"anonymous");
                 redis_set_json($token,$user,"0");
                 return $user;
         }
@@ -35,7 +35,7 @@ function authorize($username,$password, $token)
 function logout($user)
 {
         $token=$_COOKIE['MYSID'];
-        $user=array('id'=>NULL,'username'=>"Visitor");
+        $user=array('id'=>NULL,'username'=>"anonymous");
         redis_set_json($token,$user,"0");
         return $user;
 }
@@ -59,20 +59,6 @@ function redis_get_json($key)
         $ret=json_decode($redisClient->get($key),true);
         $redisClient->close();
         return $ret;
-}
-
-function show_menu($user)
-{
-echo '
-<nav class="uk-navbar">
-    <ul class="uk-navbar-nav">';
-                if ($user==NULL or $user['id']==NULL)
-                        echo '<li class="uk-active"><a href="login.php">Login</a></li>';
-                else
-                        echo '<li class="uk-active"><a href="logout.php">Logout</a></li>';
-echo '        <li class="uk-parent"><a href="index.php">Home</a></li>
-    </ul>
-</nav>';
 }
 
 function add_admin() {

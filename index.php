@@ -1,6 +1,5 @@
 <?php
 include_once('./layout/header.php');
-show_menu($user);
-echo $user['username'];
+echo 'Welcome ' . $user['username'] .' user!';
 include_once('./layout/footer.php');
 ?>
