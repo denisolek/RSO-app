@@ -1,6 +1,6 @@
 <?php
 	include('./classes/user.php');
-	
+
 	class Database {
 
 		public $c;
@@ -55,7 +55,6 @@
 			$query = "SELECT * FROM user WHERE username = '" . $username . "'";
 
 			$result = $this->c->query($query);
-
 
 			if ($result->num_rows==1) {
 				$data = array();

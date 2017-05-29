@@ -6,7 +6,7 @@ function session_check()
         if(!isset($_COOKIE['MYSID'])) {
                 $token=md5(rand(0,1000000000));
                 setcookie('MYSID', $token);
-                $user=array('id'=>NULL,'username'=>"anonymous");
+                $user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
                 redis_set_json($token, $user,0);
         }
         else
@@ -23,11 +23,8 @@ function authorize($username,$password, $token)
         if ($username != NULL && $password != NULL && $username != '' && $password != '')
         {
 					$db_password = $db->get_user_password($username);
-					$db_id = $db->find_id_by_username($username);
 					$db_user = $db->fetch_user_data($username);
-					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
-						// $user=array('id'=>$db_id, 'username'=>$username);
-						var_dump($db_user);
+					if ($db_password != NULL && $password == $db_password) {
 						$user = (array) $db_user;
 					} else {
 						alert('Wrong username or password');
@@ -44,7 +41,7 @@ function authorize($username,$password, $token)
 function logout($user)
 {
         $token=$_COOKIE['MYSID'];
-        $user=array('id'=>NULL,'username'=>"anonymous");
+        $user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
         redis_set_json($token,$user,"0");
         return $user;
 }
