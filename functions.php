@@ -24,11 +24,14 @@ function authorize($username,$password, $token)
         {
 					$db_password = $db->get_user_password($username);
 					$db_id = $db->find_id_by_username($username);
+					$db_user = $db->fetch_user_data($username);
 					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
-						$user=array('id'=>$db_id, 'username'=>$username);
+						// $user=array('id'=>$db_id, 'username'=>$username);
+						var_dump($db_user);
+						$user = (array) $db_user;
 					} else {
 						alert('Wrong username or password');
-						$user=array('id'=>NULL,'username'=>"anonymous");
+						$user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
 					}
 
 					redis_set_json($token,$user,"0");
@@ -50,7 +53,7 @@ function redis_set_json($key, $val, $expire)
 {
         $redisClient = new Redis();
         $redisClient->connect( '192.168.17.133', 6379 );
-        $value=json_encode($val);
+				$value=str_replace('\\u0000UserService\\u0000_', '', json_encode($val));
         if ($expire > 0)
                 $redisClient->setex($key, $expire, $value );
         else
