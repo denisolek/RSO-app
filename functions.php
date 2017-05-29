@@ -19,17 +19,23 @@ function session_check()
 
 function authorize($username,$password, $token)
 {
-        if ($username!=NULL and $password!=NULL)
+		global $db;
+        if ($username != NULL && $password != NULL && $username != '' && $password != '')
         {
-                if ($username=="kalkos" and $password=="qwerty")
-                        $user=array('id'=>333,'username'=>$username);
-                else
-                        $user=array('id'=>NULL,'username'=>"anonymous");
-                redis_set_json($token,$user,"0");
-                return $user;
-        }
-        else
-                return redis_get_json($token);
+					$db_password = $db->get_user_password($username);
+					$db_id = $db->find_id_by_username($username);
+					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
+						$user=array('id'=>$db_id, 'username'=>$username);
+					} else {
+						alert('Wrong username or password');
+						$user=array('id'=>NULL,'username'=>"anonymous");
+					}
+
+					redis_set_json($token,$user,"0");
+					return $user;
+        } else {
+					return redis_get_json($token);
+				}
 }
 
 function logout($user)

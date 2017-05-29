@@ -35,6 +35,18 @@
 			return $id;
 		}
 
+		public function get_user_password($username) {
+			$query = "SELECT password FROM user WHERE username = '" . $username . "'";
+
+			$result = $this->c->query($query);
+
+			if ($result->num_rows>0) {
+				$password = $result->fetch_assoc()['password'];
+			} else {
+				return null;
+			}
+			return $password;
+		}
 	}
 
 	$db = new Database();
