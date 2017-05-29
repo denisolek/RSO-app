@@ -33,13 +33,13 @@ if (isset($_POST['btn-signup'])) {
         <div class="form-group row">
           <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
           <div class="col-sm-9">
-            <input name="password" class="form-control" id="inputPassword" placeholder="Password">
+            <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
           </div>
         </div>
         <div class="form-group row">
           <label for="inputConfirmPassword" class="col-sm-3 col-form-label">Re-password</label>
           <div class="col-sm-9">
-            <input name="confirm_password" class="form-control" id="inputConfirmPassword" placeholder="Confirm password">
+            <input type="password" name="confirm_password" class="form-control" id="inputConfirmPassword" placeholder="Confirm password">
           </div>
         </div>
         <div class="form-group">

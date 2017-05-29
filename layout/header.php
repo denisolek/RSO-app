@@ -19,11 +19,26 @@ add_admin();
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="index.php">RSO - APP</a>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" href="login.php">Login</a>
-          <a class="nav-item nav-link" href="wall.php">WALL</a>
-        </div>
+      <div class="container">
+          <a class="navbar-brand" href="index.php">RSO - APP</a>
+          <ul class="nav navbar-nav mr-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="login.php">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="wall.php">Wall</a>
+              </li>
+          </ul>
+          <?php
+            if ($user['id']!=NULL) {
+              echo '
+                <ul class="nav navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">LOGOUT</a>
+                    </li>
+                </ul>
+              ';
+            }
+          ?>
       </div>
     </nav>

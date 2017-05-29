@@ -26,7 +26,7 @@ echo '<form method="post" action="login.php" class="uk-form">
         <div class="form-group row">
           <label for="inputLogin" class="col-sm-2 col-form-label">Login</label>
           <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputLogin" placeholder="Login">
+            <input class="form-control" id="inputLogin" placeholder="Login">
           </div>
         </div>
         <div class="form-group row">
