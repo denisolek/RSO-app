@@ -1,6 +1,6 @@
 <?php
 include_once('./layout/header.php');
-show_menu($user);
-echo $user['username'];
+logout($user);
+echo 'Logged out !';
 include_once('./layout/footer.php');
 ?>

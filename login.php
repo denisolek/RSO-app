@@ -1,5 +1,22 @@
 <?php
 include_once('./layout/header.php');
+
+show_menu($user);
+if ($user==NULL or $user['id']==NULL)
+{
+echo '<form method="post" action="login.php" class="uk-form">
+        <fieldset data-uk-margin>
+        <legend>Log in</legend>
+          <input name="username" type="text" placeholder="username">
+          <input name="password" type="password" placeholder="password">
+          <button class="uk-button">Go!</button>
+          <label><input type="checkbox">Remember me!</label>
+          </fieldset>
+      </form>';
+} else {
+  echo "Witaj ".$user['username']."!";
+}
+?>
 ?>
 
 <div class="container">
