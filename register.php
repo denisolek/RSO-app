@@ -1,49 +1,49 @@
 <?php
 include_once('./layout/header.php');
+
+if (isset($_POST['btn-signup'])) {
+
+  if ($_POST['username'] == '' || $_POST['password'] == '' || $_POST['confirm_password'] == '') {
+    alert('Fields cant be empty !');
+  } else {
+    if ($_POST['password'] == $_POST['confirm_password']) {
+      if (isUsernameAvailable($_POST['username'])) {
+        register($_POST['username'], $_POST['password']);
+        alert('Registered ! You can now login :)');
+      } else {
+        alert('Username already exists!');
+      }
+    } else {
+      alert('Password and confirm password are different!');
+    }
+  }
+}
+
 ?>
 <div class="container">
   <div class="row content">
     <div class="col-md-6 offset-md-3">
       <form method="post" action="register.php">
         <div class="form-group row">
-          <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-          <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputName" placeholder="Name">
+          <label for="inputUsername" class="col-sm-3 col-form-label">Username</label>
+          <div class="col-sm-9">
+            <input name="username" class="form-control" id="inputUsername" placeholder="Username">
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputSurname" class="col-sm-2 col-form-label">Surname</label>
-          <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputSurname" placeholder="Surname">
+          <label for="inputPassword" class="col-sm-3 col-form-label">Password</label>
+          <div class="col-sm-9">
+            <input name="password" class="form-control" id="inputPassword" placeholder="Password">
           </div>
         </div>
         <div class="form-group row">
-          <label for="inputAddress" class="col-sm-2 col-form-label">Address</label>
-          <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputAddress" placeholder="Address">
+          <label for="inputConfirmPassword" class="col-sm-3 col-form-label">Re-password</label>
+          <div class="col-sm-9">
+            <input name="confirm_password" class="form-control" id="inputConfirmPassword" placeholder="Confirm password">
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputNip" class="col-sm-2 col-form-label">Nip</label>
-          <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputNip" placeholder="Nip">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputPesel" class="col-sm-2 col-form-label">Pesel</label>
-          <div class="col-sm-10">
-            <input type="name" class="form-control" id="inputPesel" placeholder="Pesel">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-sm-2 col-form-label">Avatar</label>
-          <label class="custom-file text-left">
-            <input type="file" id="file" class="custom-file-input">
-            <span class="custom-file-control"></span>
-          </label>
         </div>
         <div class="form-group">
-            <input class="btn btn-primary btn-block" type="submit" value="Register">
+            <input name="btn-signup" class="btn btn-primary btn-block" type="submit" value="Register">
         </div>
       </form>
     </div>
