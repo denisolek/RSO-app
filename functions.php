@@ -23,19 +23,18 @@ function authorize($username,$password, $token)
         if ($username != NULL && $password != NULL && $username != '' && $password != '')
         {
 					$db_password = $db->get_user_password($username);
+					$db_id = $db->find_id_by_username($username);
 					$db_user = $db->fetch_user_data($username);
-					if ($db_password != NULL && $password == $db_password) {
+					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
 						$user = (array) $db_user;
 					} else {
 						alert('Wrong username or password');
 						$user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
 					}
-
 					redis_set_json($token,$user,"0");
-					return $user;
-        } else {
-					return redis_get_json($token);
-				}
+        }
+				return redis_get_json($token);
+
 }
 
 function logout($user)

@@ -39,7 +39,7 @@ if ($user==NULL or $user['id']==NULL)
   </div>
   ';
 } else {
-  echo "Witaj ".$user['username']."!";
+  echo "Witaj ".$user['name']."!";
 }
 ?>
 
