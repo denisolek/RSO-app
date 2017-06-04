@@ -76,9 +76,9 @@ function add_admin() {
     }
 }
 
-function register($username, $password) {
+function register($username, $password, $name, $surname) {
         global $db;
-        $db->add_user($username, $password);
+        $db->add_user($username, $password, $name, $surname);
 }
 
 function alert($msg) {
@@ -201,10 +201,18 @@ function verifyThumbnail($username) {
   }
 }
 
+function verifyThumbnailSmall($username) {
+  if (file_exists('uploads/thumbnail_small/'.$username.'.png')) {
+    return 'uploads/thumbnail_small/'.$username.'.png';
+  } else {
+    return 'uploads/thumbnail_small/default.png';
+  }
+}
+
 function get_posts() {
   $redis_posts = redis_get_json('posts');
 
-  if ($redis_posts > 0) {
+  if (sizeof($redis_posts) > 0) {
     return $redis_posts;
   } else {
     global $db;

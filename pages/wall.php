@@ -1,6 +1,6 @@
 <?php
-get_posts();
-?>
+$last_posts = get_posts();
+echo '
 <div class="row col-md-8 offset-md-2 content">
   <form class="col-md-8 offset-md-2">
     <div class="form-group">
@@ -11,95 +11,24 @@ get_posts();
     <button type="submit" class="btn btn-primary" style="min-width: 300px;">Submit</button>
   </form>
 </div>
-<div class="row col-md-8 offset-md-2">
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
+<div class="row col-md-8 offset-md-2 post-container">
+';
+foreach ($last_posts as $key=>$post) {
+    $postNumber = $key+1;
+    echo '
+    <div class="col-md-6">
+      <div class="card single-card">
+        <h3 class="card-header">'.$postNumber.'. <img src="'.verifyThumbnailSmall($post['username']).'" alt="Card image cap"> '.$post['name'].' '.$post['surname'].'</h3>
+        <div class="card-block">
+          <h6 class="card-title">28.03.2017 - 15:43</h6>
+          <p class="card-text">'.$post['text'].'</p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="card single-card">
-      <h3 class="card-header"><img src="uploads/thumbnail_small/test.png" alt="Card image cap"> Król Dzidus</h3>
-      <div class="card-block">
-        <h6 class="card-title">28.03.2017 - 15:43</h6>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis,.</p>
-      </div>
-    </div>
-  </div>
+    ';
+}
+
+echo '
 </div>
+';
+?>

@@ -20,9 +20,9 @@
             $result = $this->c->query($query);
         }
 
-    public function add_user($username, $password) {
-            $query = "INSERT INTO user (username, password)
-                                VALUES (\"" . $username . "\", \"" . $password . "\")";
+    public function add_user($username, $password, $name, $surname) {
+            $query = "INSERT INTO user (username, password, name, surname)
+                                VALUES (\"" . $username . "\", \"" . $password . "\", \"" . $name . "\", \"" . $surname . "\")";
             $result = $this->c->query($query);
         }
 
@@ -91,7 +91,11 @@
         }
 
         public function fetch_posts() {
-          $query = "SELECT * FROM post ORDER BY id DESC LIMIT 4";
+          $query = "SELECT post.id, post.text, user.name, user.surname, user.username
+                    FROM post
+                    INNER JOIN user
+                    ON post.user=user.id
+                    ORDER BY post.id DESC LIMIT 4";
 
           $result = $this->c->query($query);
           $posts = array();
