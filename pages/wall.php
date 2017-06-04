@@ -20,7 +20,7 @@ foreach ($last_posts as $key=>$post) {
       <div class="card single-card">
         <h3 class="card-header">'.$postNumber.'. <img src="'.verifyThumbnailSmall($post['username']).'" alt="Card image cap"> '.$post['name'].' '.$post['surname'].'</h3>
         <div class="card-block">
-          <h6 class="card-title">28.03.2017 - 15:43</h6>
+          <h6 class="card-title">'.$post['createdOn'].'</h6>
           <p class="card-text">'.$post['text'].'</p>
         </div>
       </div>

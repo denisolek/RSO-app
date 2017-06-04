@@ -121,6 +121,7 @@ function updateProfile($id, $name, $surname, $nip, $pesel, $address) {
       $db_user = $db->fetch_user_data($id);
       $token=$_COOKIE['MYSID'];
       redis_set_json($token,(array) $db_user,'0');
+      update_posts_cache();
       return redis_get_json($token);
     }
   } else {
@@ -215,9 +216,13 @@ function get_posts() {
   if (sizeof($redis_posts) > 0) {
     return $redis_posts;
   } else {
-    global $db;
-    $posts = $db->fetch_posts();
-    redis_set_json('posts',(array) $posts, '0');
-    return $posts;
+    update_posts_cache();
+    return redis_get_json('posts');
   }
+}
+
+function update_posts_cache() {
+  global $db;
+  $posts = $db->fetch_posts();
+  redis_set_json('posts',(array) $posts, '0');
 }
