@@ -1,6 +1,10 @@
 <?php
+if ($user==NULL or $user['id']==NULL) {
+  redirectJS('login');
+}
+
 $target_dir = "uploads/fullsize/";
-$target_file = $target_dir . preg_replace('"\.(jpg|jpeg|gif)$"', '.png', basename($_FILES["avatarInput"]["name"]));
+$target_file = $target_dir . $user['username'] . '.png';
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 $error_msg = "";
@@ -10,10 +14,6 @@ if(isset($_POST["submitUpload"])) {
       $error_msg = $error_msg . 'File is not an image. \n';
       $uploadOk = 0;
     }
-}
-if (file_exists($target_file)) {
-    $error_msg = $error_msg . 'Sorry, file already exists. \n';
-    $uploadOk = 0;
 }
 if ($_FILES["avatarInput"]["size"] > 500000) {
     $error_msg = $error_msg . 'Sorry, your file is too large. \n';
@@ -30,9 +30,15 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["avatarInput"]["tmp_name"], $target_file)) {
         alert('The file has been uploaded.');
+        $fullsize = imagecreatefromstring(file_get_contents("uploads/fullsize/test.png"));
+
+        resizeImage($fullsize, 256, 256, 'thumbnail');
+        resizeImage($fullsize, 75, 80, 'thumbnail_small');
+
+
     } else {
         alert('Sorry, there was an error uploading your file.');
     }
 }
-redirectJS('profile');
+// redirectJS('profile');
 ?>

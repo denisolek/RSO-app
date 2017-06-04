@@ -171,3 +171,23 @@ function checkNIP($str){
     }
     return false;
 }
+
+function resizeImage($fullsize, $newWidth, $newHeight, $size) {
+  $im = $fullsize;
+
+  $srcWidth = imagesx($im);
+  $srcHeight = imagesy($im);
+
+  $newImg = imagecreatetruecolor($newWidth, $newHeight);
+  imagealphablending($newImg, false);
+  imagesavealpha($newImg,true);
+  $transparent = imagecolorallocatealpha($newImg, 255, 255, 255, 127);
+  imagefilledrectangle($newImg, 0, 0, $newWidth, $newHeight, $transparent);
+  imagecopyresampled($newImg, $im, 0, 0, 0, 0, $newWidth, $newHeight, $srcWidth, $srcHeight);
+
+  if ($size === 'thumbnail') {
+    imagepng($newImg, "uploads/thumbnail/test.png");
+  } elseif ($size === 'thumbnail_small') {
+    imagepng($newImg, "uploads/thumbnail_small/test.png");
+  }
+}

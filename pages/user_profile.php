@@ -36,7 +36,7 @@ echo '
   </div>
   <div class="col-4">
     <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="uploads/fullsize/default.png" alt="Card image cap">
+      <img class="card-img-top" src="uploads/fullsize/test.png" alt="Card image cap">
       <div class="card-block">
         <h4 class="card-title">Avatar</h4>
         <form action="upload" method="post" enctype="multipart/form-data">
