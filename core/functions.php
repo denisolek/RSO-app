@@ -172,7 +172,8 @@ function checkNIP($str){
     return false;
 }
 
-function resizeImage($fullsize, $newWidth, $newHeight, $size) {
+function resizeImage($fullsize, $newWidth, $newHeight, $size, $username) {
+  var_dump($username);
   $im = $fullsize;
 
   $srcWidth = imagesx($im);
@@ -186,8 +187,16 @@ function resizeImage($fullsize, $newWidth, $newHeight, $size) {
   imagecopyresampled($newImg, $im, 0, 0, 0, 0, $newWidth, $newHeight, $srcWidth, $srcHeight);
 
   if ($size === 'thumbnail') {
-    imagepng($newImg, "uploads/thumbnail/test.png");
+    imagepng($newImg, "uploads/thumbnail/".$username.".png");
   } elseif ($size === 'thumbnail_small') {
-    imagepng($newImg, "uploads/thumbnail_small/test.png");
+    imagepng($newImg, "uploads/thumbnail_small/".$username.".png");
+  }
+}
+
+function verifyThumbnail($username) {
+  if (file_exists('uploads/thumbnail/'.$username.'.png')) {
+    return 'uploads/thumbnail/'.$username.'.png';
+  } else {
+    return 'uploads/thumbnail/default.png';
   }
 }

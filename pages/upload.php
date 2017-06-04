@@ -30,15 +30,12 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["avatarInput"]["tmp_name"], $target_file)) {
         alert('The file has been uploaded.');
-        $fullsize = imagecreatefromstring(file_get_contents("uploads/fullsize/test.png"));
-
-        resizeImage($fullsize, 256, 256, 'thumbnail');
-        resizeImage($fullsize, 75, 80, 'thumbnail_small');
-
-
+        $fullsize = imagecreatefromstring(file_get_contents("uploads/fullsize/" . $user['username'] . ".png"));
+        resizeImage($fullsize, 256, 256, 'thumbnail', $user['username']);
+        resizeImage($fullsize, 75, 80, 'thumbnail_small', $user['username']);
     } else {
         alert('Sorry, there was an error uploading your file.');
     }
 }
-// redirectJS('profile');
+redirectJS('profile');
 ?>
