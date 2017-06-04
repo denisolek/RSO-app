@@ -1,4 +1,5 @@
 <?php
 logout($user);
-echo 'Logged out !';
+alert('Logged out!');
+redirectJS('login');
 ?>

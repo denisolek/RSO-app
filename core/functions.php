@@ -19,21 +19,21 @@ function session_check()
 
 function authorize($username,$password, $token)
 {
-		global $db;
+        global $db;
         if ($username != NULL && $password != NULL && $username != '' && $password != '')
         {
-					$db_password = $db->get_user_password($username);
-					$db_id = $db->find_id_by_username($username);
-					$db_user = $db->fetch_user_data($db_id);
-					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
-						$user = (array) $db_user;
-					} else {
-						alert('Wrong username or password');
-						$user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
-					}
-					redis_set_json($token,$user,"0");
+                    $db_password = $db->get_user_password($username);
+                    $db_id = $db->find_id_by_username($username);
+                    $db_user = $db->fetch_user_data($db_id);
+                    if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
+                        $user = (array) $db_user;
+                    } else {
+                        alert('Wrong username or password');
+                        $user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
+                    }
+                    redis_set_json($token,$user,"0");
         }
-				return redis_get_json($token);
+                return redis_get_json($token);
 
 }
 
@@ -49,7 +49,7 @@ function redis_set_json($key, $val, $expire)
 {
         $redisClient = new Redis();
         $redisClient->connect( '192.168.17.133', 6379 );
-				$value=str_replace('\\u0000UserService\\u0000_', '', json_encode($val));
+                $value=str_replace('\\u0000UserService\\u0000_', '', json_encode($val));
         if ($expire > 0)
                 $redisClient->setex($key, $expire, $value );
         else
@@ -67,18 +67,18 @@ function redis_get_json($key)
 }
 
 function add_admin() {
-	global $db;
-	$id = $db->find_id_by_username($username);
-	if ($id == null) {
-		$db->add_admin();
-	} else {
-		return false;
-	}
+    global $db;
+    $id = $db->find_id_by_username($username);
+    if ($id == null) {
+        $db->add_admin();
+    } else {
+        return false;
+    }
 }
 
 function register($username, $password) {
-		global $db;
-		$db->add_user($username, $password);
+        global $db;
+        $db->add_user($username, $password);
 }
 
 function alert($msg) {
@@ -95,14 +95,14 @@ function redirectJS($url) {
 }
 
 function isUsernameAvailable($username) {
-	global $db;
-	$id = $db->find_id_by_username($username);
+    global $db;
+    $id = $db->find_id_by_username($username);
 
-	if ($id == null) {
-		return true;
-	} else {
-		return false;
-	}
+    if ($id == null) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function show($variable) {
@@ -115,11 +115,59 @@ function show($variable) {
 
 function updateProfile($id, $name, $surname, $nip, $pesel, $address) {
   global $db;
-  $db->update_user($id, $name, $surname, $nip, $pesel, $address);
-  if ($db) {
-    $db_user = $db->fetch_user_data($id);
-    $token=$_COOKIE['MYSID'];
-    redis_set_json($token,(array) $db_user,"0");
-    return redis_get_json($token);
+  if ((checkPESEL($pesel) || $pesel == 'EMPTY') && (checkNIP($nip) || $nip == 'EMPTY')) {
+    $db->update_user($id, $name, $surname, $nip, $pesel, $address);
+    if ($db) {
+      $db_user = $db->fetch_user_data($id);
+      $token=$_COOKIE['MYSID'];
+      redis_set_json($token,(array) $db_user,"0");
+      return redis_get_json($token);
+    }
+  } else {
+    alert('Wrong NIP or PESEL format');
   }
+}
+
+function checkPESEL($str){
+    if (!preg_match('/^[0-9]{11}$/',$str))
+    {
+        return false;
+    }
+
+    $arrSteps = array(1, 3, 7, 9, 1, 3, 7, 9, 1, 3);
+    $intSum = 0;
+    for ($i = 0; $i < 10; $i++)
+    {
+        $intSum += $arrSteps[$i] * $str[$i];
+    }
+    $int = 10 - $intSum % 10;
+    $intControlNr = ($int == 10)?0:$int;
+    if ($intControlNr == $str[10])
+    {
+        return true;
+    }
+    return false;
+}
+
+function checkNIP($str){
+    $str = preg_replace("/[^0-9]+/","",$str);
+    if (strlen($str) != 10)
+    {
+        return false;
+    }
+
+    $arrSteps = array(6, 5, 7, 2, 3, 4, 5, 6, 7);
+    $intSum=0;
+    for ($i = 0; $i < 9; $i++)
+    {
+        $intSum += $arrSteps[$i] * $str[$i];
+    }
+    $int = $intSum % 11;
+
+    $intControlNr=($int == 10)?0:$int;
+    if ($intControlNr == $str[9])
+    {
+        return true;
+    }
+    return false;
 }
