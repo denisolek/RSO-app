@@ -85,11 +85,6 @@ function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
-function redirect($url) {
-  header('Location: ' . $url);
-  die();
-}
-
 function redirectJS($url) {
   echo '<script>window.location.replace("'.$url.'");</script>';
 }
