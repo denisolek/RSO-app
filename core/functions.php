@@ -24,7 +24,7 @@ function authorize($username,$password, $token)
         {
 					$db_password = $db->get_user_password($username);
 					$db_id = $db->find_id_by_username($username);
-					$db_user = $db->fetch_user_data($username);
+					$db_user = $db->fetch_user_data($db_id);
 					if ($db_password != NULL && $password == $db_password && $db_id != NULL) {
 						$user = (array) $db_user;
 					} else {
@@ -103,4 +103,23 @@ function isUsernameAvailable($username) {
 	} else {
 		return false;
 	}
+}
+
+function show($variable) {
+  if ($variable == NULL ) {
+    return 'EMPTY';
+  } else {
+    return $variable;
+  }
+}
+
+function updateProfile($id, $name, $surname, $nip, $pesel, $address) {
+  global $db;
+  $db->update_user($id, $name, $surname, $nip, $pesel, $address);
+  if ($db) {
+    $db_user = $db->fetch_user_data($id);
+    $token=$_COOKIE['MYSID'];
+    redis_set_json($token,(array) $db_user,"0");
+    return redis_get_json($token);
+  }
 }

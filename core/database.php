@@ -25,6 +25,20 @@
 			$result = $this->c->query($query);
 		}
 
+		public function update_user($id, $name, $surname, $nip, $pesel, $address)
+		{
+			$query = "UPDATE user
+								SET name = '$name', surname = '$surname', nip = '$nip', pesel = '$pesel', address = '$address'
+								WHERE id = '$id'";
+			$result = $this->c->query($query);
+
+			if ($result) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
 		public function find_id_by_username($username) {
 			$query = "SELECT id FROM user WHERE username = '" . $username . "'";
 			$result = $this->c->query($query);
@@ -50,9 +64,9 @@
 			return $password;
 		}
 
-		public function fetch_user_data($username) {
+		public function fetch_user_data($id) {
 
-			$query = "SELECT * FROM user WHERE username = '" . $username . "'";
+			$query = "SELECT * FROM user WHERE id = '" . $id . "'";
 
 			$result = $this->c->query($query);
 
