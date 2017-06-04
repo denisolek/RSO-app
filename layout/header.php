@@ -22,12 +22,24 @@ add_admin();
       <div class="container">
           <a class="navbar-brand" href="index.php">RSO - APP</a>
           <ul class="nav navbar-nav mr-auto">
-              <li class="nav-item">
-                  <a class="nav-link" href="login.php">Login</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="wall.php">Wall</a>
-              </li>
+            <?php
+              if ($user['id']!=NULL) {
+                echo '
+                <li class="nav-item">
+                    <a class="nav-link" href="user_profile.php">My profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="wall.php">Wall</a>
+                </li>
+                ';
+              } else {
+                echo '
+                <li class="nav-item">
+                    <a class="nav-link" href="login.php">Login</a>
+                </li>
+                ';
+              }
+            ?>
           </ul>
           <?php
             if ($user['id']!=NULL) {
