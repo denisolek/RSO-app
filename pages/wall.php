@@ -1,3 +1,6 @@
+<?php
+get_posts();
+?>
 <div class="row col-md-8 offset-md-2 content">
   <form class="col-md-8 offset-md-2">
     <div class="form-group">

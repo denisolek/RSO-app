@@ -89,6 +89,20 @@
             }
             return $user;
         }
+
+        public function fetch_posts() {
+          $query = "SELECT * FROM post ORDER BY id DESC LIMIT 4";
+
+          $result = $this->c->query($query);
+          $posts = array();
+
+          if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              array_push($posts, $row);
+            }
+          }
+          return $posts;
+        }
     }
 
     $db = new Database();

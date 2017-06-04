@@ -200,3 +200,10 @@ function verifyThumbnail($username) {
     return 'uploads/thumbnail/default.png';
   }
 }
+
+function get_posts() {
+  global $db;
+  $posts = $db->fetch_posts();
+
+  var_dump($posts);
+}
