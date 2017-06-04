@@ -12,9 +12,10 @@ body {
   padding: 10px;
 }
 .custom-file-control {
-  margin-left: 15px;
+
 }
 .custom-file-control:lang(en)::after {
+  margin-left: -100px;
   content: "Choose avatar...";
 }
 

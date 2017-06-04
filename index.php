@@ -26,6 +26,9 @@ switch ($uri) {
     case "/update":
         include "pages/user_update.php";
         break;
+    case "/upload":
+        include "pages/upload.php";
+        break;
     default:
         include "pages/404.php";
         break;
