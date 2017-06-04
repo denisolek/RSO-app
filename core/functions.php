@@ -85,6 +85,15 @@ function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
 }
 
+function redirect($url) {
+  header('Location: ' . $url);
+  die();
+}
+
+function redirectJS($url) {
+  echo '<script>window.location.replace("'.$url.'");</script>';
+}
+
 function isUsernameAvailable($username) {
 	global $db;
 	$id = $db->find_id_by_username($username);

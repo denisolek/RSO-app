@@ -62,6 +62,7 @@
 				   $data[] = $single;
 				}
 				$user = new UserService($data[0]['id'],
+																$data[0]['username'],
 																$data[0]['name'],
 																$data[0]['surname'],
 																$data[0]['nip'],

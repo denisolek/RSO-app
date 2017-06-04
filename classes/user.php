@@ -2,6 +2,7 @@
 class UserService
 {
     private $_id;
+    private $_username;
     private $_name;
     private $_surname;
     private $_nip;
@@ -9,9 +10,10 @@ class UserService
     private $_address;
     private $_avatar;
 
-    function __construct($id, $name, $surname, $nip, $pesel, $address, $avatar)
+    function __construct($id, $username, $name, $surname, $nip, $pesel, $address, $avatar)
     {
       $this->_id = $id;
+      $this->_username = $username;
       $this->_name = $name;
       $this->_surname = $surname;
       $this->_nip = $nip;

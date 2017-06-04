@@ -37,6 +37,6 @@ if ($user==NULL or $user['id']==NULL)
   </div>
   ';
 } else {
-  echo "Witaj ".$user['name']."!";
+  redirectJS('profile');
 }
 ?>
