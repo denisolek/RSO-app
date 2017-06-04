@@ -1,5 +1,5 @@
 <?php
-require_once('functions.php');
+require_once('./core/functions.php');
 $user=session_check();
 add_admin();
 ?>
@@ -12,7 +12,7 @@ add_admin();
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
   </head>
   <body>
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
@@ -20,22 +20,22 @@ add_admin();
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="container">
-          <a class="navbar-brand" href="index.php">RSO - APP</a>
+          <a class="navbar-brand" href="/">RSO - APP</a>
           <ul class="nav navbar-nav mr-auto">
             <?php
               if ($user['id']!=NULL) {
                 echo '
                 <li class="nav-item">
-                    <a class="nav-link" href="user_profile.php">My profile</a>
+                    <a class="nav-link" href="profile">My profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="wall.php">Wall</a>
+                    <a class="nav-link" href="wall">Wall</a>
                 </li>
                 ';
               } else {
                 echo '
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php">Login</a>
+                    <a class="nav-link" href="login">Login</a>
                 </li>
                 ';
               }
@@ -46,7 +46,7 @@ add_admin();
               echo '
                 <ul class="nav navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="logout.php">LOGOUT</a>
+                        <a class="nav-link" href="logout">LOGOUT</a>
                     </li>
                 </ul>
               ';

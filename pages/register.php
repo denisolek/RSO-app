@@ -1,6 +1,4 @@
 <?php
-include_once('./layout/header.php');
-
 if (isset($_POST['btn-signup'])) {
 
   if ($_POST['username'] == '' || $_POST['password'] == '' || $_POST['confirm_password'] == '') {
@@ -49,6 +47,3 @@ if (isset($_POST['btn-signup'])) {
     </div>
   </div>
 </div>
-<?php
-include_once('./layout/footer.php');
-?>
