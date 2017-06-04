@@ -31,7 +31,7 @@ function authorize($username,$password, $token)
                         alert('Wrong username or password');
                         $user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
                     }
-                    redis_set_json($token,$user,"0");
+                    redis_set_json($token,$user,'0');
         }
                 return redis_get_json($token);
 
@@ -41,7 +41,7 @@ function logout($user)
 {
         $token=$_COOKIE['MYSID'];
         $user=array('id'=>NULL,'name'=>"anonymous", 'surname'=>"user");
-        redis_set_json($token,$user,"0");
+        redis_set_json($token,$user,'0');
         return $user;
 }
 
@@ -120,7 +120,7 @@ function updateProfile($id, $name, $surname, $nip, $pesel, $address) {
     if ($db) {
       $db_user = $db->fetch_user_data($id);
       $token=$_COOKIE['MYSID'];
-      redis_set_json($token,(array) $db_user,"0");
+      redis_set_json($token,(array) $db_user,'0');
       return redis_get_json($token);
     }
   } else {
@@ -202,8 +202,14 @@ function verifyThumbnail($username) {
 }
 
 function get_posts() {
-  global $db;
-  $posts = $db->fetch_posts();
+  $redis_posts = redis_get_json('posts');
 
-  var_dump($posts);
+  if ($redis_posts > 0) {
+    return $redis_posts;
+  } else {
+    global $db;
+    $posts = $db->fetch_posts();
+    redis_set_json('posts',(array) $posts, '0');
+    return $posts;
+  }
 }
