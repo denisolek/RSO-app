@@ -4,7 +4,7 @@ if ($user==NULL or $user['id']==NULL) {
 }
 echo '
 <div class="text-center" style="margin-bottom: 30px; margin-top: 30px;">
-  <h1>Hello '. $user['username'] . ' !</h1>
+  <h1>Hello '. $user['name'] . ' !</h1>
 </div>
 <div class="row justify-content-around">
   <div class="col-4">

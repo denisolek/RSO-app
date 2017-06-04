@@ -107,6 +107,29 @@
           }
           return $posts;
         }
+
+        public function add_post($id, $text) {
+          $query = "INSERT INTO post (text, user, createdOn)
+                              VALUES (\"" . $text . "\", \"" . $id . "\", NOW())";
+          $result = $this->c->query($query);
+
+          if ($result) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        public function waiting_posts_count($id) {
+          $query = "SELECT count(*)
+                    AS total_count
+                    FROM post
+                    WHERE user = '" . $id . "' AND isAccepted = false";
+
+          $result = $this->c->query($query);
+          $data= $result->fetch_assoc()['total_count'];
+          return $data;
+        }
     }
 
     $db = new Database();

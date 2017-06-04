@@ -226,3 +226,18 @@ function update_posts_cache() {
   $posts = $db->fetch_posts();
   redis_set_json('posts',(array) $posts, '0');
 }
+
+function addPost($id, $text) {
+  global $db;
+  $db->add_post($id, $text);
+  if ($db) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function waitingPostsCount($id) {
+  global $db;
+  return $db->waiting_posts_count($id);
+}
