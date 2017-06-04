@@ -20,7 +20,7 @@
             $result = $this->c->query($query);
         }
 
-    public function add_user($username, $password, $name, $surname) {
+        public function add_user($username, $password, $name, $surname) {
             $query = "INSERT INTO user (username, password, name, surname)
                                 VALUES (\"" . $username . "\", \"" . $password . "\", \"" . $name . "\", \"" . $surname . "\")";
             $result = $this->c->query($query);
@@ -83,7 +83,7 @@
                                         $data[0]['nip'],
                                         $data[0]['pesel'],
                                         $data[0]['address'],
-                                        $data[0]['avatar']);
+                                        $data[0]['isAdmin']);
             } else {
                 return null;
             }

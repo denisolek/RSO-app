@@ -32,6 +32,13 @@ add_admin();
                     <a class="nav-link" href="wall">Wall</a>
                 </li>
                 ';
+                if ($user['isAdmin']==true) {
+                  echo '
+                  <li class="nav-item">
+                      <a class="nav-link" href="admin">Admin Panel</a>
+                  </li>
+                  ';
+                }
               } else {
                 echo '
                 <li class="nav-item">

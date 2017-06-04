@@ -8,9 +8,9 @@ class UserService
     private $_nip;
     private $_pesel;
     private $_address;
-    private $_avatar;
+    private $_isAdmin;
 
-    function __construct($id, $username, $name, $surname, $nip, $pesel, $address, $avatar)
+    function __construct($id, $username, $name, $surname, $nip, $pesel, $address, $isAdmin)
     {
       $this->_id = $id;
       $this->_username = $username;
@@ -19,6 +19,6 @@ class UserService
       $this->_nip = $nip;
       $this->_pesel = $pesel;
       $this->_address = $address;
-      $this->_avatar = $avatar;
+      $this->_isAdmin = $isAdmin;
     }
 }
