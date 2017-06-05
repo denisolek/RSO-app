@@ -108,7 +108,7 @@
         }
 
         public function fetch_post_by_id($id) {
-          $query = "SELECT post.id, post.text, post.createdOn, user.name, user.surname, user.username
+          $query = "SELECT post.id, post.text, post.createdOn, user.name, user.surname
                     FROM post
                     INNER JOIN user
                     ON post.user=user.id
