@@ -6,6 +6,8 @@ if ($user==NULL or $user['id']==NULL) {
 if (isset($_POST['btn-post'])) {
   if ($_POST['add_post'] == '') {
     alert('At least write something ...');
+  } elseif (strlen($_POST['add_post']) > 256) {
+    alert('Posts cant have more than 256 characters!');
   } elseif (addPost($user['id'], $_POST['add_post'])) {
     alert('Post has been added - now its waiting for admin approval.');
     redirect('/redirect');
