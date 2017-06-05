@@ -239,7 +239,8 @@ function waitingPostsCount($id) {
 }
 
 function getMessageToReview() {
-  return queueGet('posts');
+  $post = (queueGet('posts'));
+  return $post;
 }
 
 function addMessageToReview($post) {

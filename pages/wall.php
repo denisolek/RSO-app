@@ -7,7 +7,6 @@ if (isset($_POST['btn-post'])) {
   if ($_POST['add_post'] == '') {
     alert('At least write something ...');
   } elseif (addPost($user['id'], $_POST['add_post'])) {
-    // addMessageToReview($_POST['add_post']);
     alert('Post has been added - now its waiting for admin approval.');
   }
 }
