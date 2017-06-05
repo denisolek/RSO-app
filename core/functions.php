@@ -170,7 +170,6 @@ function checkNIP($str){
 }
 
 function resizeImage($fullsize, $newWidth, $newHeight, $size, $username) {
-  var_dump($username);
   $im = $fullsize;
 
   $srcWidth = imagesx($im);
@@ -255,13 +254,15 @@ function addMessageToReview($post) {
 function acceptPost($post) {
   global $db;
   if ($db->accept_post($post['id'])) {
-    requeue('posts');
+    removeFromQueue('posts');
   };
+  update_posts_cache();
 }
 
 function declinePost($post) {
   global $db;
   if ($db->decline_post($post['id'])) {
-    requeue('posts');
+    removeFromQueue('posts');
   }
+  update_posts_cache();
 }

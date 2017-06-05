@@ -14,6 +14,7 @@ function queueGet($queueName) {
   $ch->queue_bind($queue, $exchange);
   $msg = $ch->basic_get($queue);
   if ($msg !== NULL) {
+    $ch->basic_recover($msg->delivery_info['delivery_tag']);
     return $msg->body;
   } else {
     return false;
@@ -23,7 +24,7 @@ function queueGet($queueName) {
   $conn->close();
 }
 
-function requeue($queueName) {
+function removeFromQueue($queueName) {
   $exchange = $queueName . '_exchange';
   $queue = $queueName . '_queue';
 

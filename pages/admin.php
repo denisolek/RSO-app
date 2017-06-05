@@ -3,7 +3,6 @@ if ($user==NULL or $user['id']==NULL or $user['isAdmin']==false) {
   redirectJS('login');
 }
 $reviewPost = json_decode(getMessageToReview(), true);
-
 if (isset($_POST['btn-accept'])) {
   acceptPost($reviewPost);
 } elseif (isset($_POST['btn-decline'])) {
