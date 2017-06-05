@@ -158,6 +158,30 @@
           $data= $result->fetch_assoc()['total_count'];
           return $data;
         }
+
+        public function accept_post($id) {
+          $query = "UPDATE post
+                    SET isAccepted = 1, verified = 1
+                    WHERE id = '$id'";
+          $result = $this->c->query($query);
+          if ($result) {
+              return true;
+          } else {
+              return false;
+          }
+        }
+
+        public function decline_post($id) {
+          $query = "UPDATE post
+                    SET verified = 1
+                    WHERE id = '$id'";
+          $result = $this->c->query($query);
+          if ($result) {
+              return true;
+          } else {
+              return false;
+          }
+        }
     }
 
     $db = new Database();

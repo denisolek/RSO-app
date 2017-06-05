@@ -251,3 +251,17 @@ function getMessageToReview() {
 function addMessageToReview($post) {
   queuePublish('posts', $post);
 }
+
+function acceptPost($post) {
+  global $db;
+  if ($db->accept_post($post['id'])) {
+    requeue('posts');
+  };
+}
+
+function declinePost($post) {
+  global $db;
+  if ($db->decline_post($post['id'])) {
+    requeue('posts');
+  }
+}
