@@ -31,89 +31,89 @@
 
         public function add_admin() {
           $this->connectMaster();
-            $query = "INSERT INTO user (username, password, name, surname, isAdmin)
-                                VALUES ('admin', 'admin', 'Admin', ' ', true)";
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $query = "INSERT INTO user (username, password, name, surname, isAdmin)
+                              VALUES ('admin', 'admin', 'Admin', ' ', true)";
+          $result = $this->c->query($query);
+          $this->disconnect();
         }
 
         public function add_user($username, $password, $name, $surname) {
           $this->connectMaster();
-            $query = "INSERT INTO user (username, password, name, surname)
-                                VALUES (\"" . $username . "\", \"" . $password . "\", \"" . $name . "\", \"" . $surname . "\")";
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $query = "INSERT INTO user (username, password, name, surname)
+                              VALUES (\"" . $username . "\", \"" . $password . "\", \"" . $name . "\", \"" . $surname . "\")";
+          $result = $this->c->query($query);
+          $this->disconnect();
         }
 
         public function update_user($id, $name, $surname, $nip, $pesel, $address)
         {
           $this->connectMaster();
-            $query = "UPDATE user
-                                SET name = '$name', surname = '$surname', nip = '$nip', pesel = '$pesel', address = '$address'
-                                WHERE id = '$id'";
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $query = "UPDATE user
+                              SET name = '$name', surname = '$surname', nip = '$nip', pesel = '$pesel', address = '$address'
+                              WHERE id = '$id'";
+          $result = $this->c->query($query);
+          $this->disconnect();
 
-            if ($result) {
-                return true;
-            } else {
-                return false;
-            }
+          if ($result) {
+              return true;
+          } else {
+              return false;
+          }
         }
 
         public function find_id_by_username($username) {
-            $this->connect();
-            $query = "SELECT id FROM user WHERE username = '" . $username . "'";
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $this->connect();
+          $query = "SELECT id FROM user WHERE username = '" . $username . "'";
+          $result = $this->c->query($query);
+          $this->disconnect();
 
-            if ($result->num_rows > 0) {
-                $id = $result->fetch_assoc()['id'];
-            } else {
-                return null;
-            }
-            return $id;
+          if ($result->num_rows > 0) {
+              $id = $result->fetch_assoc()['id'];
+          } else {
+              return null;
+          }
+          return $id;
         }
 
         public function get_user_password($username) {
-            $this->connect();
-            $query = "SELECT password FROM user WHERE username = '" . $username . "'";
+          $this->connect();
+          $query = "SELECT password FROM user WHERE username = '" . $username . "'";
 
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $result = $this->c->query($query);
+          $this->disconnect();
 
-            if ($result->num_rows>0) {
-                $password = $result->fetch_assoc()['password'];
-            } else {
-                return null;
-            }
-            return $password;
+          if ($result->num_rows>0) {
+              $password = $result->fetch_assoc()['password'];
+          } else {
+              return null;
+          }
+          return $password;
         }
 
         public function fetch_user_data($id) {
-            $this->connect();
-            $query = "SELECT * FROM user WHERE id = '" . $id . "'";
+          $this->connect();
+          $query = "SELECT * FROM user WHERE id = '" . $id . "'";
 
-            $result = $this->c->query($query);
-            $this->disconnect();
+          $result = $this->c->query($query);
+          $this->disconnect();
 
-            if ($result->num_rows==1) {
-                $data = array();
-                while($single = $result->fetch_assoc()){
-                   $data[] = $single;
-                }
-                $user = new UserService($data[0]['id'],
-                                        $data[0]['username'],
-                                        $data[0]['name'],
-                                        $data[0]['surname'],
-                                        $data[0]['nip'],
-                                        $data[0]['pesel'],
-                                        $data[0]['address'],
-                                        $data[0]['isAdmin']);
-            } else {
-                return null;
-            }
-            return $user;
+          if ($result->num_rows==1) {
+              $data = array();
+              while($single = $result->fetch_assoc()){
+                 $data[] = $single;
+              }
+              $user = new UserService($data[0]['id'],
+                                      $data[0]['username'],
+                                      $data[0]['name'],
+                                      $data[0]['surname'],
+                                      $data[0]['nip'],
+                                      $data[0]['pesel'],
+                                      $data[0]['address'],
+                                      $data[0]['isAdmin']);
+          } else {
+              return null;
+          }
+          return $user;
         }
 
         public function fetch_posts() {
