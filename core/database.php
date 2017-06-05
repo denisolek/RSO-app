@@ -1,4 +1,3 @@
-
 <?php
     include('./classes/user.php');
 
@@ -7,7 +6,7 @@
         public $c;
 
         public function __construct() {
-      include ('./config/connection.php');
+            include ('./config/connection.php');
             $this->c = new mysqli($servername_master, $username_master, $password_master, $dbname_master);
             if ($this->c->connect_error) {
                 die("Failed to connect with db: " . $c->connect_error);
@@ -108,12 +107,30 @@
           return $posts;
         }
 
+        public function fetch_post_by_id($id) {
+          $query = "SELECT post.id, post.text, post.createdOn, user.name, user.surname, user.username
+                    FROM post
+                    INNER JOIN user
+                    ON post.user=user.id
+                    WHERE post.id = '" . $id . "'";
+          $result = $this->c->query($query);
+
+          if ($result->num_rows>0) {
+              return $result->fetch_assoc();
+          } else {
+              return null;
+          }
+        }
+
         public function add_post($id, $text) {
           $query = "INSERT INTO post (text, user, createdOn)
                               VALUES (\"" . $text . "\", \"" . $id . "\", NOW())";
           $result = $this->c->query($query);
 
           if ($result) {
+            $addedIndex = $this->c->insert_id;
+            $post = $this->fetch_post_by_id($addedIndex);
+            addMessageToReview(json_encode($post));
             return true;
           } else {
             return false;

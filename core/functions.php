@@ -1,5 +1,6 @@
 <?php
 require_once('database.php');
+require_once('rabbitmq.php');
 
 function session_check()
 {
@@ -235,4 +236,12 @@ function addPost($id, $text) {
 function waitingPostsCount($id) {
   global $db;
   return $db->waiting_posts_count($id);
+}
+
+function getMessageToReview() {
+  return queueGet('posts');
+}
+
+function addMessageToReview($post) {
+  queuePublish('posts', $post);
 }
