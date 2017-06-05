@@ -7,6 +7,9 @@ echo '
 <div class="col-md-8 offset-md-2 content">
   <h4>Posts waiting for approval: </h4>
   <h1>'.adminWaitingPostsCount().'</h1>
+';
+if ($reviewMessage !== NULL) {
+  echo '
   <div class="card" style="margin-top: 40px;">
     <h3 class="card-header">'.$reviewMessage['name'].' '.$reviewMessage['surname'].'</h3>
     <div class="card-block">
@@ -16,7 +19,6 @@ echo '
         <div class="row justify-content-around" style="margin-top: 50px;">
           <div class="col-md-6">
             <input name="btn-accept" class="btn btn-success btn-block" type="submit" value="ACCEPT">
-
           </div>
           <div class="col-md-6">
             <input name="btn-decline" class="btn btn-danger btn-block" type="submit" value="REJECT">
@@ -25,6 +27,9 @@ echo '
       </div>
     </div>
   </div>
+  ';
+}
+echo '
 </div>
 ';
 ?>

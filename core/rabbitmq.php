@@ -14,7 +14,6 @@ function queueGet($queueName) {
   $ch->queue_bind($queue, $exchange);
   $msg = $ch->basic_get($queue);
   if ($msg !== NULL) {
-    // $ch->basic_ack($msg->delivery_info['delivery_tag']);
     return $msg->body;
   } else {
     return false;
