@@ -94,7 +94,8 @@
                     FROM post
                     INNER JOIN user
                     ON post.user=user.id
-                    ORDER BY post.id DESC LIMIT 4";
+                    WHERE post.isAccepted = 1
+                    ORDER BY post.id DESC LIMIT 10";
 
           $result = $this->c->query($query);
           $posts = array();
