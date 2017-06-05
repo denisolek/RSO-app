@@ -1,6 +1,7 @@
 <?php
 require_once('database.php');
 require_once('rabbitmq.php');
+ob_start();
 
 function session_check()
 {
@@ -84,6 +85,9 @@ function register($username, $password, $name, $surname) {
 
 function alert($msg) {
     echo '<script type="text/javascript">alert("' . $msg . '")</script>';
+}
+function redirect($url) {
+  header('Location: '.$url.'');
 }
 
 function redirectJS($url) {

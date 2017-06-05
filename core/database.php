@@ -14,8 +14,8 @@
         }
 
         public function add_admin() {
-            $query = "INSERT INTO user (username, password, isAdmin)
-                                VALUES ('admin', 'admin', true)";
+            $query = "INSERT INTO user (username, password, name, surname, isAdmin)
+                                VALUES ('admin', 'admin', 'Admin', ' ', true)";
             $result = $this->c->query($query);
         }
 
@@ -142,7 +142,7 @@
           $query = "SELECT count(*)
                     AS total_count
                     FROM post
-                    WHERE user = '" . $id . "' AND isAccepted = false";
+                    WHERE user = '" . $id . "' AND verified = false";
 
           $result = $this->c->query($query);
           $data= $result->fetch_assoc()['total_count'];
@@ -153,7 +153,7 @@
           $query = "SELECT count(*)
                     AS total_count
                     FROM post
-                    WHERE isAccepted = false";
+                    WHERE verified = false";
 
           $result = $this->c->query($query);
           $data= $result->fetch_assoc()['total_count'];

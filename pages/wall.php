@@ -8,6 +8,8 @@ if (isset($_POST['btn-post'])) {
     alert('At least write something ...');
   } elseif (addPost($user['id'], $_POST['add_post'])) {
     alert('Post has been added - now its waiting for admin approval.');
+    redirect('/redirect');
+    exit;
   }
 }
 

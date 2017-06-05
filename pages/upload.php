@@ -33,6 +33,7 @@ if ($uploadOk == 0) {
         $fullsize = imagecreatefromstring(file_get_contents("uploads/fullsize/" . $user['username'] . ".png"));
         resizeImage($fullsize, 256, 256, 'thumbnail', $user['username']);
         resizeImage($fullsize, 75, 80, 'thumbnail_small', $user['username']);
+        redirect('/redirect');
     } else {
         alert('Sorry, there was an error uploading your file.');
     }

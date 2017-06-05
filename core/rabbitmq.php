@@ -40,7 +40,6 @@ function removeFromQueue($queueName) {
   } else {
     return false;
   }
-
   $ch->close();
   $conn->close();
 }

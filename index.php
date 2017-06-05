@@ -5,6 +5,9 @@ switch ($uri) {
     case "/":
         include "pages/home.php";
         break;
+    case "/redirect":
+        include "pages/redirect.php";
+        break;
     case "/register":
         include "pages/register.php";
         break;
