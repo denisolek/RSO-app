@@ -238,6 +238,11 @@ function waitingPostsCount($id) {
   return $db->waiting_posts_count($id);
 }
 
+function adminWaitingPostsCount() {
+  global $db;
+  return $db->admin_waiting_posts_count();
+}
+
 function getMessageToReview() {
   $post = (queueGet('posts'));
   return $post;

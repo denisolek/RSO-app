@@ -147,6 +147,17 @@
           $data= $result->fetch_assoc()['total_count'];
           return $data;
         }
+
+        public function admin_waiting_posts_count() {
+          $query = "SELECT count(*)
+                    AS total_count
+                    FROM post
+                    WHERE isAccepted = false";
+
+          $result = $this->c->query($query);
+          $data= $result->fetch_assoc()['total_count'];
+          return $data;
+        }
     }
 
     $db = new Database();
