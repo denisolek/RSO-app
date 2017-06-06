@@ -1,20 +1,24 @@
 <?php
 class UserService
 {
+    private $_id;
+    private $_username;
     private $_name;
     private $_surname;
-    private $_address;
     private $_nip;
     private $_pesel;
-    private $_avatar;
+    private $_address;
+    private $_isAdmin;
 
-    function __construct($name, $surname, $address, $nip, $pesel, $avatar)
+    function __construct($id, $username, $name, $surname, $nip, $pesel, $address, $isAdmin)
     {
+      $this->_id = $id;
+      $this->_username = $username;
       $this->_name = $name;
       $this->_surname = $surname;
-      $this->_address = $address;
       $this->_nip = $nip;
       $this->_pesel = $pesel;
-      $this->_avatar = $avatar;
+      $this->_address = $address;
+      $this->_isAdmin = $isAdmin;
     }
 }
