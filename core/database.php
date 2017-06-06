@@ -159,7 +159,6 @@
           $query = "INSERT INTO post (text, user, createdOn)
                               VALUES (\"" . $text . "\", \"" . $id . "\", NOW())";
           $result = $this->c->query($query);
-          $this->disconnect();
 
           if ($result) {
             $addedIndex = $this->c->insert_id;
@@ -169,6 +168,7 @@
           } else {
             return false;
           }
+          $this->disconnect();
         }
 
         public function waiting_posts_count($id) {
