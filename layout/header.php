@@ -48,16 +48,19 @@ add_admin();
               }
             ?>
           </ul>
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <span class="nav-text" style="color: #1a83de;"><b>RS 1</b></span>
+            </li>
           <?php
             if ($user['id']!=NULL) {
               echo '
-                <ul class="nav navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">LOGOUT</a>
-                    </li>
-                </ul>
+                  <li class="nav-item">
+                      <a class="nav-link" href="logout">LOGOUT</a>
+                  </li>
               ';
             }
           ?>
+          </ul>
       </div>
     </nav>
